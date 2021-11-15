@@ -1,0 +1,141 @@
+{% extends "base.html" %}
+{% set open_page = "project_embez" %}
+{% set active_page = "project_embez_1" %}
+{% block content %}
+
+
+  <div class="content-wrapper" id = "wrapper_page">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Caggle 智能捕手</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content-header -->
+
+    <div class="content">
+      <div class="container-fluid">
+
+        <!-- 區塊一 -->
+        <!-- Overview -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h2 class="card-title" style="font-weight: bold; color:#00B050;">Overview</h2>
+          </div>
+          <div class="card-body">
+            <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#nav-dec" type="button" role="tab" aria-controls="nav-dec" aria-selected="true" style="color:cadetblue">Description</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-eva" type="button" role="tab" aria-controls="nav-eva" aria-selected="false" style="color:cadetblue">Evaluation</button>
+                <button class="nav-link" data-bs-toggle="tab" data-bs-target="#nav-sub" type="button" role="tab" aria-controls="nav-sub" aria-selected="false" style="color:cadetblue">Submission Instructions</button>
+              </div>
+            </nav>
+            <div class="tab-content" id="nav-tabContent">
+              <div class="tab-pane fade show active" id="nav-dec" role="tabpanel" aria-labelledby="nav-dec-tab">
+                <div style="padding: 10px;">
+                  <h4 id="-">專案說明</h4>
+                  <li>資格：數據部全體人員</li>
+                  <li>方式：即刻開始，最少 1 人，最多 3 人為 1 隊，傳 cteam 訊息跟阿
+                    崴說：+1</li>
+                  <li>費用：完全免費!完全免費!完全免費! 請大家熱情參與</li>
+                  <li>活動時程：2021/10/1 ~ 2021/11/30(兩個月)，視情況增加複賽</li>
+                  <br>
+                  <h4 id="-">預測目標</h4>
+                  <p>業務員-客戶為 1 pair 的流用發生機率</p>
+                  <h4 id="-">參考資料</h4>
+                  至 \\cxlsvr174\國壽商業分析教育資源(期限 20221231)\Caggle下載資料進行分析，內涵： <br>
+                  (1) Training_Data.csv: 複數組客戶-業務員資料，111 個變數，有 label <br>
+                  (2) Training.egp: 上面那個資料(1)的 sas 專案檔 <br>
+                  (3) Training_meta.xlsx: 上面那個資料(1)的 metadata <br>
+                  (4) Money.egp: 金流事件資料 sas 專案檔(可選用) <br>
+                  (5) Money_meta.xlsx: 上面那個資料(4)的 metadata <br>
+                  <br>
+                  <h4 id="-">獎項與名額</h4>
+                  <li>金牌獎(1 隊)：獎金新台幣 1 萬元、每位隊員獎紙一張、大家的好棒棒稱讚。</li> 
+                  <li>優選獎(n/2 隊)：喬敬大大的美味下午茶(飲料)+大家的好棒棒稱讚。</li> 
+                  <br>
+                  <h4 id="-">注意事項</h4>
+                  <li>此為公司資料，參加活動請使用本機PC，勿將資料放到外網上。</li> 
+                  <li>請不要使用公司內部資料庫的未來資料作弊，會檢驗程式。</li> 
+
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-eva" role="tabpanel" aria-labelledby="nav-eva-tab">
+                <div style="padding: 10px;">
+                  <h4 id="-">評分標準</h4>
+                  <p>簡單來說就是AUC，要分數不要0、1。</p>
+                  <a href="{{ url_for('static', filename='page/embez/embez1.png')}}" class="example-image-link" data-lightbox="example-set" style="padding: 2px;"><img src="{{ url_for('static', filename='page/embez/embez1.png')}}" width="300"></a>
+                </div>
+              </div>
+              <div class="tab-pane fade" id="nav-sub" role="tabpanel" aria-labelledby="nav-sub-tab">
+                <div style="padding: 10px;">
+                  <h4 id="-">預測資料</h4>
+                  <p>Predictions: 客戶-業務員資料，附贈 111 個變數，沒有 label，2021/11/15 23:59 前將結果上傳。</p>
+                  (1) 預測結果上傳至工程組提供的 Leaderboard，ipynb程式碼也請一併上傳<br>
+                  (2) 最終版 Code 請記得自行上傳 Gitlab <br>
+                  (3) 分析說明 ppt 上傳至\\cxlsvr174\國壽商業分析教育資源(期限20221231)\Caggle <br>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 區塊二 -->
+        <!-- 附件區 -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h2 class="card-title" style="font-weight: bold; color:#00B050;">附件區</h2>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <p>相關資料請參考公用資料夾。</p>
+              <table class="table">
+                <tr>
+                  <th>embez_example</th>
+                  <td>14.8 MB</td>
+                  <td>上傳資料範例</td>
+                  <td><a href="{{ url_for('static', filename='page/embez/embez_example.csv')}}"><button type="button" class="btn btn-primary float-right btn-sm" style="margin-right:"><i class="fas fa-download"></i></button></a></td>
+                </tr>
+                <tr>
+                  <th>Caggle 競賽-智能捕手活動辦法</th>
+                  <td>165.7 KB</td>
+                  <td>專案活動說明</td>
+                  <td><a href="{{ url_for('static', filename='page/embez/2021_Caggle_embez.pdf')}}" target="_blank"><button type="button" class="btn btn-primary float-right btn-sm" style="margin-right:"><i class="fas fa-download"></i></button></a></td>
+                </tr>
+                
+
+                
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+  </div> <!-- /.content-wrapper -->
+
+
+
+  {% endblock %}

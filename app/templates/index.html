@@ -1,0 +1,178 @@
+{% extends "base.html" %}
+{% set open_page = "index" %}
+{% set active_page = "index" %}
+{% block content %}
+
+
+  <div class="content-wrapper" id = "wrapper_page">
+
+
+
+    <div class="content">
+      <div class="container-fluid">
+
+        <div class="content-header">
+          <div class="container-fluid">
+            
+        </div>
+
+
+        <!-- 區塊一 -->
+        <!-- 公告 -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h2 class="card-title" style="font-weight: bold; color:#00B050;">最新公告</h2>
+          </div>
+          <div class="card-body">
+            <div>
+              <p>
+                <b style="padding-right: 20px;">2021-11-15</b>
+                外網版目前維修中，請先使用內網版 Caggle 唷~
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+
+        
+
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+  </div> <!-- /.content-wrapper -->
+
+
+
+
+
+<script>
+  $('#submit').click(function(){
+    var name = $('#name').val();
+    var message = $('#message').val();
+    if(name===''|message===''){
+      $('#errorAlert').show();
+      $('#successAlert').hide();
+    }
+    else {
+      var data = {
+      data:JSON.stringify({
+        'name':name,
+        'message':message
+      })
+      };
+      $('#name').val("");
+      $('#message').val("");
+      // 打API
+      $.ajax({
+        type:'POST',
+        url:'/simple_message_board',
+        data:data
+      }).then(function(data){
+        $('#successAlert').show();
+        $('#errorAlert').hide();
+        $('#message_list').prepend('<div><span style="font-weight: bold;">@'+name+'</span><i style="color: rgb(153, 153, 153); font-size:smaller; padding-left: 10px;">'+data.date+'</i><p>'+message+'</p><hr></div>');
+      });
+    }
+    
+
+    event.preventDefault();
+  });
+
+  $(document).ready(function(){
+    $("#testimonial-slider").owlCarousel({
+        items:2,
+        itemsDesktop:[1000,1],
+        itemsDesktopSmall:[979,1],
+        itemsTablet:[768,1],
+        pagination: true,
+        autoPlay:true
+    });
+});
+
+</script>
+
+
+<!-- 感言 -->
+<style>
+.testimonial{
+    background-color: #f3f3f3;
+    border-radius: 5px;
+    padding: 30px;
+    margin: 0 15px;
+}
+.testimonial .pic{
+    width: 90px;
+    height: 90px;
+    margin: 0 30px 15px 0;
+    float: left;
+}
+.testimonial .pic img{
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+}
+.testimonial .testimonial-title{
+    color: #000000;
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: 800;
+    text-transform: capitalize;
+}
+.testimonial .testimonial-title small{
+    display: block;
+    color: #dc005a;
+    font-size: 14px;
+    font-weight: 800;
+    margin-top: 10px;
+}
+.testimonial .testimonial-review p{
+    color: #888888;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 19px;
+    margin-bottom: 0;
+}
+.owl-theme .owl-controls{
+    margin-top: 20px;
+}
+.owl-theme .owl-controls .owl-page span{
+    width: 10px;
+    height: 10px;
+    background:rgb(212, 212, 212);
+    opacity: 1;
+}
+.owl-theme .owl-controls .owl-page.active span,
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+    background: #fff;
+    border: 1px solid #cdcdcd;
+}
+.owl-pagination{
+    margin-top: 20px;
+}
+.owl-theme .owl-controls .owl-page.active span, 
+.owl-theme .owl-controls.clickable .owl-page:hover span{
+    background:#00B050;
+    border:3px solid #00B050;
+}
+@media screen and (max-width: 990px){
+    .testimonial-parallax h2{
+        margin-bottom: 40px;
+    }
+    .testimonial{
+        margin: 0;
+    }
+}                  
+</style>
+
+  {% endblock %}

@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+{% set open_page = "project_embez" %}
+{% set active_page = "project_embez_2" %}
+{% block content %}
+
+
+  <div class="content-wrapper" id = "wrapper_page">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">智能捕手 Leaderboard</h1>
+            <p style="color: gray;">
+              上傳 csv 規格可以參考專案說明。
+            </p>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item active"></li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /.content-header -->
+
+    <div class="content">
+      <div class="container-fluid">
+
+        <div id="successAlert" class="alert alert-success" role="alert" style="display:none;"></div>
+	      <div id="errorAlert" class="alert alert-danger" role="alert" style="display:none;"></div>
+
+
+        <!-- 區塊一 -->
+        <!-- submit pred -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h2 class="card-title" style="font-weight: bold; color:#00B050;">Submit Predicrions</h2>
+          </div>
+          <div class="card-body">
+            <form method="POST" id="embez_form" enctype='multipart/form-data'>
+              <div class="row">
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" id = "embez_name" name = "embez_name" class="form-control" placeholder="Who r u..." required>
+                  </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Upload submission file</label>
+                    <div class="custom-file">
+                     <input type="file" id = "embez_csv" name = "embez_csv" class="custom-file-input" accept=".csv, .CSV" required>
+                     <label class="custom-file-label" for="submissionFile">Choose cav file</label>
+                   </div>
+                 </div>
+                </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Upload Notebook (非必要)</label>
+                    <div class="custom-file">
+                     <input type="file" id = "embez_nb" name = "embez_nb" class="custom-file-input" accept=".ipynb, .IPYNB">
+                     <label class="custom-file-label" for="notebookFile">Choose ipynb file</label>
+                   </div>
+                 </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Describe submission</label>
+                <textarea class="form-control" id = "embez_des" name = "embez_des" rows="3" placeholder="Enter ..."></textarea>
+              </div>
+              <button type="submit" id = "embez_submit" class="btn btn-info float-right">Make Submission</button>
+            </form>
+          </div>
+        </div>
+
+
+        <!-- 區塊二 -->
+        <!-- leaderboard -->
+        <div class="card card-default">
+          <div class="card-header">
+            <h2 class="card-title" style="font-weight: bold; color:#00B050;">Leaderboard</h2>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table id = "embez_table" class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>NO</th>
+                    <th>Name</th>
+                    <th>Notebook</th>
+                    <th style="width: 30%;">說明</th>
+                    <th>AUC</th>
+                    <th>上傳日期</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for item in leaderboard_list %}
+                  <tr>
+                    <th>{{loop.index}}</th>
+                    <td>{{item[1]}}</td>
+                    <td>
+                      {% if item[3] !='' %}
+                      {% set filename = item[3].split('.')[0] %}
+                      <a href="/downloadFile/{{item[3]}}.html" target="_blank"><button type="button" class="btn btn-warning btn-sm">Notebook</button></a>
+                      {% endif %}
+                    </td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[5]}}</td>
+                    <td>{{item[6]}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+
+
+
+
+
+
+           
+          </div>
+        </div>
+        
+
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+  </div> <!-- /.content-wrapper -->
+
+
+  <script>
+    // 上傳成果
+    $('#embez_submit').click(function(){
+      var name = $('#embez_name').val();
+      var csv = $('#embez_csv').val();
+      var nb = $('#embez_nb').val();
+      var des = $('#embez_des').val();
+      // var csv_file = new FormData($('#embez_csv')[0]);
+      if(name==='' | csv===''){
+        $('#errorAlert').text("送出失敗，可能內容有誤").show();
+        $('#successAlert').hide();
+      }
+      else{
+        $('#successAlert').text("送出成功，智能捕手資料量大，請等待運算").show();
+        $('#errorAlert').hide();
+        $("#embez_form").attr("action", "/project_embez_evaluation");
+
+      }
+      
+    });
+
+    // 顯示datatable
+    $('#embez_table').DataTable({
+      });
+  </script>
+
+
+
+  {% endblock %}
