@@ -14,6 +14,8 @@ def evaluation_metrics_embez(df_Y,df_predict):
     RCALL-PERCENT Curve AUC (1000 切點)
     '''
     try:
+        df_Y['DATA_DATE'] = df_Y['DATA_DATE'].apply(pd.to_datetime)
+        df_predict['DATA_DATE'] = df_predict['DATA_DATE'].apply(pd.to_datetime)
         df_ass = pd.merge(df_Y,df_predict, on=['AGENT_ID_SAS','APC_ID_SAS','DATA_DATE'],how='left')
         p = 1/1000
         df_ass = df_ass.sort_values(by=['SCORE'],ascending=False)
